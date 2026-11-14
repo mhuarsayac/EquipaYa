@@ -16,9 +16,10 @@ public class ClienteView {
             System.out.println("\n1. Consultar clientes" +
                     "\n2. Registrar cliente" +
                     "\n3. Buscar un cliente" +
-                    "\n4. Actualizar cliente" +
-                    "\n5. Eliminar cliente" +
-                    "\n6. Regresar al menu principal");
+                    "\n4. Buscar clientes por una parte del nombre" +
+                    "\n5. Actualizar cliente" +
+                    "\n6. Eliminar cliente" +
+                    "\n7. Regresar al menu principal");
             System.out.print("Ingresa una opcion: ");
             opcion = Integer.parseInt(scanner.nextLine());
             switch (opcion) {
@@ -32,12 +33,15 @@ public class ClienteView {
                     buscarCliente();
                     break;
                 case 4:
-                    actualizarCliente();
+                    buscarClientesPorFragmento();
                     break;
                 case 5:
-                    eliminarCliente();
+                    actualizarCliente();
                     break;
                 case 6:
+                    eliminarCliente();
+                    break;
+                case 7:
                     System.out.println("Regresando al menu principal");
                     ejecutando = false;
                     break;
@@ -71,7 +75,6 @@ public class ClienteView {
         String nombre = scanner.nextLine();
         System.out.print("Telefono: ");
         String telefono = scanner.nextLine();
-
         clienteController.actualizarCliente(documentoClienteActualizar, nombre, telefono);
     }
 
@@ -79,5 +82,11 @@ public class ClienteView {
         System.out.print("\nIngrese el docuemnto del cliente a eliminar: ");
         String documentoClienteEliminar = scanner.nextLine();
         clienteController.eliminarCliente(documentoClienteEliminar);
+    }
+
+    private void buscarClientesPorFragmento(){
+        System.out.print("Fragmento del nombre de clientes a buscar: ");
+        String fragmentoNombre = scanner.nextLine();
+        clienteController.mostrarClientesPorFragmento(fragmentoNombre);
     }
 }

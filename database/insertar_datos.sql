@@ -17,7 +17,7 @@ VALUES ('C001', 'Camara Sony FX3', 250.00, 'S', 'CAMARA'),
 
 INSERT INTO alquiler (id_alquiler, documento, codigo_equipo, fecha_inicio, numero_dias, monto_cobrado, devuelto)
 VALUES ('A001', 'DNI123', 'C001', '2026-11-01', 3, 862.50, 'S'),
-       ('A002', 'RUC123', 'C002', '2026-11-10', 2, 575.00, 'N'),
+       ('A002', 'RUC123', 'C002', '2026-11-10', 2, 414.00, 'N'),
        ('A003', 'DNI456', 'I001', '2026-10-20', 7, 567.00, 'S'),
        ('A004', 'RUC456', 'I002', '2026-11-12', 6, 648.00, 'N'),
        ('A005', 'DNI789', 'A001', '2026-10-15', 1, 120.00, 'S'),

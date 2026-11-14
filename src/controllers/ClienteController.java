@@ -17,8 +17,8 @@ public class ClienteController {
     }
 
     public void mostrarTodos() {
-        for (ClienteModel p : clienteDAO.listarTodos()) {
-            p.mostrarInformacion();
+        for (ClienteModel c : clienteDAO.listarTodos()) {
+            c.mostrarInformacion();
         }
     }
 
@@ -28,6 +28,12 @@ public class ClienteController {
             clienteBuscado.mostrarInformacion();
         } else {
             System.out.println("No se pudo encontrar al cliente");
+        }
+    }
+
+    public void mostrarClientesPorFragmento(String fragmentoNombre){
+        for (ClienteModel c : clienteDAO.buscarPorNombre(fragmentoNombre)){
+            c.mostrarInformacion();
         }
     }
 

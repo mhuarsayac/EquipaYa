@@ -115,4 +115,26 @@ public class ClienteDAOImpl implements ClienteDAO {
             return false;
         }
     }
+
+    @Override
+    public List<ClienteModel> buscarPorNombre(String fragmento) {
+        List<ClienteModel> lista = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM cliente WHERE nombre LIKE ?";
+            Connection cn = DatabaseConnector.conectarBaseDeDatos();
+            PreparedStatement ps = cn.prepareStatement(sql);
+            ps.setString(1, "%" + fragmento + "%");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                lista.add(new ClienteModel(
+                        rs.getString("documento"),
+                        rs.getString("nombre"),
+                        rs.getString("telefono")
+                ));
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al buscar " + e.getMessage());
+        }
+        return lista;
+    }
 }

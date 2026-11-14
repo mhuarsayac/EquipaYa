@@ -4,7 +4,7 @@ USE EquipaYa;
 CREATE TABLE cliente
 (
     documento VARCHAR(11),
-    nombre    VARCHAR(25) NOT NULL,
+    nombre    VARCHAR(100) NOT NULL,
     telefono  VARCHAR(9)  NOT NULL,
 
     CONSTRAINT cliente_documento_pk
@@ -31,7 +31,7 @@ CREATE TABLE equipo
 
 CREATE TABLE alquiler
 (
-    id_alquiler   VARCHAR(5),
+    id_alquiler   INT AUTO_INCREMENT,
     documento     VARCHAR(11)    NOT NULL,
     codigo_equipo VARCHAR(5)     NOT NULL,
     fecha_inicio  DATE           NOT NULL,
