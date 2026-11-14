@@ -12,9 +12,10 @@ public class MainView {
         int opcion;
         while (ejecutando) {
             System.out.println("\n1. Administrar clientes" +
-                    "\n2. Administrar equipos" +
-                    "\n3. Administrar arquileres" +
-                    "\n4. Salir");
+                    "\n2. Administrar tipos de equipos" +
+                    "\n3. Administrar equipos" +
+                    "\n4. Administrar arquileres" +
+                    "\n5. Salir");
             System.out.print("Ingresa una opcion: ");
             opcion = Integer.parseInt(scanner.nextLine());
             switch (opcion) {
@@ -23,12 +24,16 @@ public class MainView {
                     clienteView.ejecutar();
                     break;
                 case 2:
-
+                    TipoView tipoView = new TipoView();
+                    tipoView.ejecutar();
                     break;
                 case 3:
 
                     break;
                 case 4:
+
+                    break;
+                case 5:
                     System.out.println("Finalizando programa");
                     ejecutando = false;
                     break;

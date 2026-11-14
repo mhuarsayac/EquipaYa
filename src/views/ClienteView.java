@@ -1,7 +1,6 @@
 package views;
 
 import controllers.ClienteController;
-import services.DatabaseConnector;
 
 import java.util.Scanner;
 

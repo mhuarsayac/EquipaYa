@@ -43,7 +43,7 @@ public class TipoDAOImpl implements TipoDAO {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 lista.add(new TipoModel(
-                        rs.getString("idTipo"),
+                        rs.getString("id_tipo"),
                         rs.getString("nombre")
                 ));
             }
@@ -63,7 +63,7 @@ public class TipoDAOImpl implements TipoDAO {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 return new TipoModel(
-                        rs.getString("idTipo"),
+                        rs.getString("id_tipo"),
                         rs.getString("nombre")
                 );
             }
@@ -97,7 +97,7 @@ public class TipoDAOImpl implements TipoDAO {
     @Override
     public boolean eliminar(String idTipo) {
         try {
-            String sql = "DELETE FROM tipo WHERE idTipo = ?";
+            String sql = "DELETE FROM tipo WHERE id_tipo = ?";
             Connection cn = DatabaseConnector.conectarBaseDeDatos();
             PreparedStatement ps = cn.prepareStatement(sql);
             ps.setString(1, idTipo);
