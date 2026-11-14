@@ -13,7 +13,6 @@ public class DatabaseConnector {
     public static Connection conectarBaseDeDatos() {
         try {
             connection = DriverManager.getConnection(url, usuario, contrasena);
-            System.out.println("Conexion exitosa");
             return connection;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
