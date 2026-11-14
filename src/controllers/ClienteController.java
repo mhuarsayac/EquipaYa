@@ -10,7 +10,7 @@ public class ClienteController {
     public void registrar(String documento, String nombre, String telefono) {
         ClienteModel p = new ClienteModel(documento, nombre, telefono);
         if (clienteDAO.insertar(p)) {
-            System.out.println("Producto registrado.");
+            System.out.println("Cliente registrado.");
         } else {
             System.out.println("No se pudo registrar al cliente.");
         }
