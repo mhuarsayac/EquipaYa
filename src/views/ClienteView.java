@@ -69,7 +69,7 @@ public class ClienteView {
     }
 
     private void actualizarCliente() {
-        System.out.print("\nIngrese el docuemnto del cliente a actualizar: ");
+        System.out.print("\nIngrese el documento del cliente a actualizar: ");
         String documentoClienteActualizar = scanner.nextLine();
         System.out.print("Nombre: ");
         String nombre = scanner.nextLine();

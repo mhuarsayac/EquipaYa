@@ -1,14 +1,26 @@
-CREATE DATABASE IF NOT EXISTS EquipaYa;
-USE EquipaYa;
+CREATE DATABASE IF NOT EXISTS equipa_ya;
+USE equipa_ya;
 
 CREATE TABLE cliente
 (
     documento VARCHAR(11),
     nombre    VARCHAR(100) NOT NULL,
-    telefono  VARCHAR(9)  NOT NULL,
+    telefono  VARCHAR(9)   NOT NULL,
 
     CONSTRAINT cliente_documento_pk
         PRIMARY KEY (documento)
+);
+
+CREATE TABLE tipo
+(
+    id_tipo VARCHAR(5),
+    nombre  VARCHAR(35) NOT NULL,
+
+    CONSTRAINT tipo_id_tipo_pk
+        PRIMARY KEY (id_tipo),
+
+    CONSTRAINT tipo_nombre_uk
+        UNIQUE (nombre)
 );
 
 CREATE TABLE equipo
@@ -17,7 +29,7 @@ CREATE TABLE equipo
     descripcion   VARCHAR(50)    NOT NULL,
     tarifa_diaria DECIMAL(10, 2) NOT NULL,
     disponible    CHAR(1)        NOT NULL,
-    tipo_equipo   VARCHAR(30)    NOT NULL,
+    id_tipo       VARCHAR(5)    NOT NULL,
 
     CONSTRAINT equipo_codigo_pk
         PRIMARY KEY (codigo_equipo),
@@ -26,7 +38,11 @@ CREATE TABLE equipo
         CHECK (disponible IN ('S', 'N')),
 
     CONSTRAINT equipo_tarifa_ck
-        CHECK (tarifa_diaria > 0)
+        CHECK (tarifa_diaria > 0),
+
+    CONSTRAINT equipo_id_tipo_fk
+        FOREIGN KEY (id_tipo)
+            REFERENCES tipo(id_tipo)
 );
 
 CREATE TABLE alquiler
