@@ -12,8 +12,8 @@ public class MainView {
         int opcion;
         while (ejecutando) {
             System.out.println("\n1. Administrar clientes" +
-                    "\n2. Administrar la tabla EMPLEADOS" +
-                    "\n3. Administrar la tabla VENTA" +
+                    "\n2. Administrar equipos" +
+                    "\n3. Administrar arquileres" +
                     "\n4. Salir");
             System.out.print("Ingresa una opcion: ");
             opcion = Integer.parseInt(scanner.nextLine());
