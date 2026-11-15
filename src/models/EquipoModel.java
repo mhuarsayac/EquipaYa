@@ -1,16 +1,18 @@
 package models;
 
-public abstract class EquipoModel {
+public class EquipoModel {
     protected String codigoEquipo;
     protected String descripcion;
     protected double tarifaDiaria;
     protected boolean disponible;
+    protected String idTipo;
 
-    public EquipoModel(String codigoEquipo, String descripcion, double tarifaDiaria, boolean disponible) {
+    public EquipoModel(String codigoEquipo, String descripcion, double tarifaDiaria, boolean disponible, String idTipo) {
         this.codigoEquipo = codigoEquipo;
         this.descripcion = descripcion;
         this.tarifaDiaria = tarifaDiaria;
         this.disponible = disponible;
+        this.idTipo = idTipo;
     }
 
     public String getCodigoEquipo() {
@@ -41,11 +43,21 @@ public abstract class EquipoModel {
         this.disponible = disponible;
     }
 
-    public void mostrarInformacion() {
-        System.out.println("CODIGO_EQUIPO: " + codigoEquipo + " - DESCRIPCION: " + descripcion + " - TARIFA-DIARIA: " + tarifaDiaria + " - DISPONIBLE:" + disponible);
+    public String getIdTipo() {
+        return idTipo;
     }
 
-    public abstract double calcularMonto(int dias);
+    public void setIdTipo(String idTipo) {
+        this.idTipo = idTipo;
+    }
+
+    public void mostrarInformacion() {
+        System.out.println("CODIGO_EQUIPO: " + codigoEquipo + " - DESCRIPCION: " + descripcion + " - TARIFA-DIARIA: " + tarifaDiaria + " - DISPONIBLE:" + disponible + " - ID_TIPO" + idTipo);
+    }
+
+    public double calcularMonto(int dias) {
+        return tarifaDiaria * dias;
+    }
 
     //multiplica por 100 al valor, luego redondea a 2 decimales y finalmente divide entre 100
     protected double redondear(double valor) {

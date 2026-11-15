@@ -1,4 +1,6 @@
 package dao;
 
-public interface EquipoDAO {
+import models.EquipoModel;
+
+public interface EquipoDAO extends GenericDAO<EquipoModel, String>{
 }
