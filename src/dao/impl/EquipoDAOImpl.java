@@ -22,7 +22,7 @@ public class EquipoDAOImpl implements EquipoDAO {
             ps.setString(1, p.getCodigoEquipo());
             ps.setString(2, p.getDescripcion());
             ps.setDouble(3, p.getTarifaDiaria());
-            ps.setBoolean(4, p.isDisponible());
+            ps.setString(4, p.getDisponible());
             ps.setString(5, p.getIdTipo());
             int filasAfectadas = ps.executeUpdate();
             if (filasAfectadas > 0) {
@@ -40,7 +40,7 @@ public class EquipoDAOImpl implements EquipoDAO {
     public List<EquipoModel> listarTodos() {
         List<EquipoModel> lista = new ArrayList<>();
         try {
-            String sql = "SELECT codigo_equipo, descripcion, tarifa_diaria, disponible, id_tipo FROM tipo";
+            String sql = "SELECT codigo_equipo, descripcion, tarifa_diaria, disponible, id_tipo FROM equipo";
             Connection cn = DatabaseConnector.conectarBaseDeDatos();
             PreparedStatement ps = cn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
@@ -49,7 +49,7 @@ public class EquipoDAOImpl implements EquipoDAO {
                         rs.getString("codigo_equipo"),
                         rs.getString("descripcion"),
                         rs.getDouble("tarifa_diaria"),
-                        rs.getBoolean("disponible"),
+                        rs.getString("disponible"),
                         rs.getString("id_tipo")
                 ));
             }
@@ -72,7 +72,7 @@ public class EquipoDAOImpl implements EquipoDAO {
                         rs.getString("codigo_equipo"),
                         rs.getString("descripcion"),
                         rs.getDouble("tarifa_diaria"),
-                        rs.getBoolean("disponible"),
+                        rs.getString("disponible"),
                         rs.getString("id_tipo")
                 );
             }
@@ -91,7 +91,7 @@ public class EquipoDAOImpl implements EquipoDAO {
             PreparedStatement ps = cn.prepareStatement(sql);
             ps.setString(1, p.getDescripcion());
             ps.setDouble(2, p.getTarifaDiaria());
-            ps.setBoolean(3, p.isDisponible());
+            ps.setString(3, p.getDisponible());
             ps.setString(4, p.getIdTipo());
             ps.setString(5, p.getCodigoEquipo());
             int filasAfectadas = ps.executeUpdate();

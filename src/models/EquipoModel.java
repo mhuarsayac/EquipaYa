@@ -4,10 +4,10 @@ public class EquipoModel {
     protected String codigoEquipo;
     protected String descripcion;
     protected double tarifaDiaria;
-    protected boolean disponible;
+    protected String disponible;
     protected String idTipo;
 
-    public EquipoModel(String codigoEquipo, String descripcion, double tarifaDiaria, boolean disponible, String idTipo) {
+    public EquipoModel(String codigoEquipo, String descripcion, double tarifaDiaria, String disponible, String idTipo) {
         this.codigoEquipo = codigoEquipo;
         this.descripcion = descripcion;
         this.tarifaDiaria = tarifaDiaria;
@@ -35,11 +35,11 @@ public class EquipoModel {
         this.tarifaDiaria = tarifaDiaria;
     }
 
-    public boolean isDisponible() {
+    public String getDisponible() {
         return disponible;
     }
 
-    public void setDisponible(boolean disponible) {
+    public void setDisponible(String disponible) {
         this.disponible = disponible;
     }
 
@@ -52,7 +52,7 @@ public class EquipoModel {
     }
 
     public void mostrarInformacion() {
-        System.out.println("CODIGO_EQUIPO: " + codigoEquipo + " - DESCRIPCION: " + descripcion + " - TARIFA-DIARIA: " + tarifaDiaria + " - DISPONIBLE:" + disponible + " - ID_TIPO" + idTipo);
+        System.out.println("CODIGO_EQUIPO: " + codigoEquipo + " - DESCRIPCION: " + descripcion + " - TARIFA-DIARIA: " + tarifaDiaria + " - DISPONIBLE: " + disponible + " - ID_TIPO: " + idTipo);
     }
 
     public double calcularMonto(int dias) {

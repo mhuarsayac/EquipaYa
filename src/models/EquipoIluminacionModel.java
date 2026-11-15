@@ -3,7 +3,7 @@ package models;
 public class EquipoIluminacionModel extends EquipoModel{
     private static final int PORCENTAJE_DESCUENTO = 15;
 
-    public EquipoIluminacionModel(String codigoEquipo, String descripcion, double tarifaDiaria, boolean disponible, String idTipo) {
+    public EquipoIluminacionModel(String codigoEquipo, String descripcion, double tarifaDiaria, String disponible, String idTipo) {
         super(codigoEquipo, descripcion, tarifaDiaria, disponible, idTipo);
     }
 

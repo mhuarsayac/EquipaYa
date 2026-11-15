@@ -7,7 +7,7 @@ import models.EquipoModel;
 public class EquipoController {
     private final EquipoDAO equipoDAO = new EquipoDAOImpl();
 
-    public void registrar(String codigoEquipo, String descripcion, double tarifaDiaria, boolean disponible, String idTipo) {
+    public void registrar(String codigoEquipo, String descripcion, double tarifaDiaria, String disponible, String idTipo) {
         EquipoModel t = new EquipoModel(codigoEquipo, descripcion, tarifaDiaria, disponible, idTipo);
         if (equipoDAO.insertar(t)) {
             System.out.println("Equipo registrado.");
@@ -31,7 +31,7 @@ public class EquipoController {
         }
     }
 
-    public void actualizarEquipo(String codigoEquipo, String descripcion, double tarifaDiaria, boolean disponible, String idTipo) {
+    public void actualizarEquipo(String codigoEquipo, String descripcion, double tarifaDiaria, String disponible, String idTipo) {
         EquipoModel equipoActualizable = equipoDAO.buscarPorCodigo(codigoEquipo);
         if (equipoActualizable != null) {
             System.out.println("El equipo fue encontrado");
@@ -49,7 +49,7 @@ public class EquipoController {
         }
     }
 
-    public void eliminarTipo(String codigoEquipo) {
+    public void eliminarEquipo(String codigoEquipo) {
         if (equipoDAO.eliminar(codigoEquipo)) {
             System.out.println("Se elimino el equipo");
         } else {

@@ -28,7 +28,8 @@ public class MainView {
                     tipoView.ejecutar();
                     break;
                 case 3:
-
+                    EquipoView equipoView = new EquipoView();
+                    equipoView.ejecutar();
                     break;
                 case 4:
 
