@@ -54,11 +54,9 @@ public class EquipoView {
         String descripcion = scanner.nextLine();
         System.out.print("Tarifa diaria: ");
         double tarifaDiaria = Double.parseDouble(scanner.nextLine());
-        System.out.print("Disponible: ");
-        String disponible = scanner.nextLine();
         System.out.print("ID del tipo al que pertenece: ");
         String idTipo = scanner.nextLine();
-        equipoController.registrar(codigoEquipo, descripcion, tarifaDiaria, disponible, idTipo);
+        equipoController.registrar(codigoEquipo, descripcion, tarifaDiaria, idTipo);
     }
 
     private void buscarEquipo() {
@@ -74,11 +72,7 @@ public class EquipoView {
         String descripcion = scanner.nextLine();
         System.out.print("Tarifa diaria: ");
         double tarifaDiaria = Double.parseDouble(scanner.nextLine());
-        System.out.print("Disponible: ");
-        String disponible = scanner.nextLine();
-        System.out.print("ID del tipo al que pertenece: ");
-        String idTipo = scanner.nextLine();
-        equipoController.actualizarEquipo(codigoEquipoActualizar, descripcion, tarifaDiaria, disponible, idTipo);
+        equipoController.actualizarEquipo(codigoEquipoActualizar, descripcion, tarifaDiaria);
     }
 
     private void eliminarEquipo() {

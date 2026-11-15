@@ -1,6 +1,6 @@
 package models;
 
-public class EquipoModel {
+public abstract class EquipoModel {
     protected String codigoEquipo;
     protected String descripcion;
     protected double tarifaDiaria;
@@ -55,9 +55,7 @@ public class EquipoModel {
         System.out.println("CODIGO_EQUIPO: " + codigoEquipo + " - DESCRIPCION: " + descripcion + " - TARIFA-DIARIA: " + tarifaDiaria + " - DISPONIBLE: " + disponible + " - ID_TIPO: " + idTipo);
     }
 
-    public double calcularMonto(int dias) {
-        return tarifaDiaria * dias;
-    }
+    public abstract double calcularMonto(int dias);
 
     //multiplica por 100 al valor, luego redondea a 2 decimales y finalmente divide entre 100
     protected double redondear(double valor) {

@@ -1,8 +1,7 @@
 package dao.impl;
 
 import dao.EquipoDAO;
-import models.ClienteModel;
-import models.EquipoModel;
+import models.*;
 import services.DatabaseConnector;
 
 import java.sql.Connection;
@@ -40,18 +39,22 @@ public class EquipoDAOImpl implements EquipoDAO {
     public List<EquipoModel> listarTodos() {
         List<EquipoModel> lista = new ArrayList<>();
         try {
-            String sql = "SELECT codigo_equipo, descripcion, tarifa_diaria, disponible, id_tipo FROM equipo";
+            String sql = "SELECT * FROM equipo";
             Connection cn = DatabaseConnector.conectarBaseDeDatos();
             PreparedStatement ps = cn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                lista.add(new EquipoModel(
+                EquipoModel equipo = CrearEquipo.crear(
                         rs.getString("codigo_equipo"),
                         rs.getString("descripcion"),
                         rs.getDouble("tarifa_diaria"),
                         rs.getString("disponible"),
                         rs.getString("id_tipo")
-                ));
+                );
+
+                if (equipo != null){
+                    lista.add(equipo);
+                }
             }
         } catch (SQLException e) {
             System.out.println("Error al listar: " + e.getMessage());
@@ -68,13 +71,17 @@ public class EquipoDAOImpl implements EquipoDAO {
             ps.setString(1, codigo);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                return new EquipoModel(
+                EquipoModel equipo = CrearEquipo.crear(
                         rs.getString("codigo_equipo"),
                         rs.getString("descripcion"),
                         rs.getDouble("tarifa_diaria"),
                         rs.getString("disponible"),
                         rs.getString("id_tipo")
                 );
+
+                if (equipo != null){
+                    return equipo;
+                }
             }
 
         } catch (SQLException e) {

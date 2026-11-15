@@ -2,18 +2,25 @@ package controllers;
 
 import dao.EquipoDAO;
 import dao.impl.EquipoDAOImpl;
+import models.CrearEquipo;
 import models.EquipoModel;
 
 public class EquipoController {
     private final EquipoDAO equipoDAO = new EquipoDAOImpl();
 
-    public void registrar(String codigoEquipo, String descripcion, double tarifaDiaria, String disponible, String idTipo) {
-        EquipoModel t = new EquipoModel(codigoEquipo, descripcion, tarifaDiaria, disponible, idTipo);
-        if (equipoDAO.insertar(t)) {
+    public void registrar(String codigoEquipo, String descripcion, double tarifaDiaria, String idTipo) {
+        EquipoModel equipo = CrearEquipo.crear(codigoEquipo, descripcion, tarifaDiaria, "S", idTipo);
+        if (equipo == null) {
+            System.out.println("Tipo de equipo no valido: " + idTipo);
+            return;
+        }
+
+        if (equipoDAO.insertar(equipo)) {
             System.out.println("Equipo registrado.");
         } else {
             System.out.println("No se pudo registrar el equipo.");
         }
+
     }
 
     public void mostrarTodos() {
@@ -31,14 +38,12 @@ public class EquipoController {
         }
     }
 
-    public void actualizarEquipo(String codigoEquipo, String descripcion, double tarifaDiaria, String disponible, String idTipo) {
+    public void actualizarEquipo(String codigoEquipo, String descripcion, double tarifaDiaria) {
         EquipoModel equipoActualizable = equipoDAO.buscarPorCodigo(codigoEquipo);
         if (equipoActualizable != null) {
             System.out.println("El equipo fue encontrado");
             equipoActualizable.setDescripcion(descripcion);
             equipoActualizable.setTarifaDiaria(tarifaDiaria);
-            equipoActualizable.setDisponible(disponible);
-            equipoActualizable.setIdTipo(idTipo);
             if (equipoDAO.actualizar(equipoActualizable)) {
                 System.out.println("El equipo fue actualizado");
             } else {
