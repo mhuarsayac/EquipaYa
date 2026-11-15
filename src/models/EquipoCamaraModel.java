@@ -1,7 +1,7 @@
 package models;
 
 public class EquipoCamaraModel extends EquipoModel {
-    private static final double PORCENTAJE_SEGURO = 15;
+    private static final int PORCENTAJE_SEGURO = 15;
 
     public EquipoCamaraModel(String codigoEquipo, String descripcion, double tarifaDiaria, boolean disponible) {
         super(codigoEquipo, descripcion, tarifaDiaria, disponible);
