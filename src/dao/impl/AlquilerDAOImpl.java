@@ -95,16 +95,21 @@ public class AlquilerDAOImpl implements AlquilerDAO {
     public List<AlquilerModel> pendientes() {
         List<AlquilerModel> lista = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM alquiler WHERE devuelto = 'N'";
+            String sql = "SELECT a.id_alquiler, c.nombre, e.descripcion, a.fecha_inicio, " +
+                    "a.numero_dias, a.monto_cobrado, a.devuelto " +
+                    "FROM alquiler a " +
+                    "JOIN cliente c ON c.documento = a.documento " +
+                    "JOIN equipo e ON e.codigo_equipo = a.codigo_equipo " +
+                    "WHERE a.devuelto = 'N'";
             Connection cn = DatabaseConnector.conectarBaseDeDatos();
             PreparedStatement ps = cn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 lista.add(new AlquilerModel(
                         rs.getInt("id_alquiler"),
-                        rs.getString("documento"),
+                        rs.getString("nombre"),
                         rs.getString("fecha_inicio"),
-                        rs.getString("codigo_equipo"),
+                        rs.getString("descripcion"),
                         rs.getInt("numero_dias"),
                         rs.getDouble("monto_cobrado"),
                         rs.getString("devuelto")
