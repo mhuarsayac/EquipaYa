@@ -73,6 +73,10 @@ public class AlquilerController {
         }
     }
 
-
+    public void mostrarFacturacion() {
+        for (String linea : alquilerDAO.facturacionPorTipo()) {
+            System.out.println(linea);
+        }
+    }
 
 }

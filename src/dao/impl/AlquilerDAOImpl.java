@@ -141,6 +141,28 @@ public class AlquilerDAOImpl implements AlquilerDAO {
     }
 
     @Override
+    public List<String> facturacionPorTipo() {
+        List<String> lista = new ArrayList<>();
+        try {
+            String sql = "SELECT t.nombre, SUM(a.monto_cobrado) AS total " +
+                    "FROM alquiler a " +
+                    "JOIN equipo e ON a.codigo_equipo = e.codigo_equipo " +
+                    "JOIN tipo t ON e.id_tipo = t.id_tipo " +
+                    "GROUP BY t.nombre " +
+                    "ORDER BY t.nombre";
+            Connection cn = DatabaseConnector.conectarBaseDeDatos();
+            PreparedStatement ps = cn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                lista.add(rs.getString("nombre") + ": S/ " + rs.getDouble("total"));
+            }
+        } catch (SQLException error) {
+            System.out.println("Error en facturacion: " + error.getMessage());
+        }
+        return lista;
+    }
+
+    @Override
     public boolean actualizar(AlquilerModel producto) {
         return false;
     }

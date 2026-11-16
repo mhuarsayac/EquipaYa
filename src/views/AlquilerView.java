@@ -17,7 +17,8 @@ public class AlquilerView {
                     "\n3. Buscar un alquiler" +
                     "\n4. Ver pendientes de devolucion" +
                     "\n5. Devolver equipo" +
-                    "\n6. Regresar al menu principal");
+                    "\n6. Ver facturacion por tipo" +
+                    "\n7. Regresar al menu principal");
             opcion = Integer.parseInt(scanner.nextLine());
             switch (opcion) {
                 case 1:
@@ -36,6 +37,9 @@ public class AlquilerView {
                     devolverEquipo();
                     break;
                 case 6:
+                    alquilerController.mostrarFacturacion();
+                    break;
+                case 7:
                     System.out.println("Regresando al menu principal");
                     ejecutando = false;
                     break;
