@@ -17,26 +17,42 @@ import java.util.List;
 public class AlquilerDAOImpl implements AlquilerDAO {
     @Override
     public boolean insertar(AlquilerModel producto) {
-        try {
-            try (Connection cn = DatabaseConnector.conectarBaseDeDatos()) {}
-            String sql = "INSERT INTO alquiler (documento,codigo_equipo,fecha_inicio,numero_dias,monto_cobrado,devuelto) VALUES (?,?,?,?,?,'N')";
-            Connection connection = DatabaseConnector.conectarBaseDeDatos();
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, producto.getDocumento());
-            ps.setString(2, producto.getCodigo_equipo());
-            ps.setString(3, producto.getFecha_inicio());
-            ps.setInt(4, producto.getNumero_dias());
-            ps.setDouble(5, producto.getMonto_cobrado());
-            int filasAfectadas = ps.executeUpdate();
-            if (filasAfectadas > 0) {
-                return true;
-            } else  {
-                return false;
-            }
-        }catch(SQLException error){
-            error.getMessage();
+        Connection cn = DatabaseConnector.conectarBaseDeDatos();
+        if (cn == null) {
+            return false;
         }
-        return false;
+        try {
+            cn.setAutoCommit(false);
+
+            String sqlEquipo = "UPDATE equipo SET disponible = 'N' WHERE codigo_equipo = ? AND disponible = 'S'";
+            try (PreparedStatement ps = cn.prepareStatement(sqlEquipo)) {
+                ps.setString(1, producto.getCodigo_equipo());
+                if (ps.executeUpdate() == 0) {
+                    cn.rollback();
+                    return false;
+                }
+            }
+            String sql = "INSERT INTO alquiler (documento,codigo_equipo,fecha_inicio,numero_dias,monto_cobrado,devuelto) VALUES (?,?,?,?,?,'N')";
+            try (PreparedStatement ps = cn.prepareStatement(sql)) {
+                ps.setString(1, producto.getDocumento());
+                ps.setString(2, producto.getCodigo_equipo());
+                ps.setString(3, producto.getFecha_inicio());
+                ps.setInt(4, producto.getNumero_dias());
+                ps.setDouble(5, producto.getMonto_cobrado());
+                ps.executeUpdate();
+            }
+
+            cn.commit();
+            return true;
+        } catch (SQLException error) {
+            System.out.println("Error al insertar arquiler: " + error.getMessage());
+            try {
+                cn.rollback();
+            } catch (SQLException ex) {
+                System.out.println("Error al deshacer: " + ex.getMessage());
+            }
+            return false;
+        }
     }
 
     public List<AlquilerModel> listarTodos() {
@@ -55,7 +71,7 @@ public class AlquilerDAOImpl implements AlquilerDAO {
                         rs.getInt("numero_dias"),
                         rs.getDouble("monto_cobrado"),
                         rs.getString("devuelto")
-                        ));
+                ));
             }
         } catch (SQLException e) {
             System.out.println("Error al listar: " + e.getMessage());
@@ -71,7 +87,7 @@ public class AlquilerDAOImpl implements AlquilerDAO {
             PreparedStatement ps = cn.prepareStatement(sql);
             ps.setString(1, codigo);
             ResultSet rs = ps.executeQuery();
-            if  (rs.next()) {
+            if (rs.next()) {
                 AlquilerModel alquiler = new AlquilerModel(
                         rs.getInt("id_alquiler"),
                         rs.getString("documento"),
@@ -84,7 +100,7 @@ public class AlquilerDAOImpl implements AlquilerDAO {
                 return alquiler;
             }
 
-        }catch (SQLException error){
+        } catch (SQLException error) {
             System.out.println("Error al buscar al alquiler por codigo: " + error.getMessage());
         }
 
