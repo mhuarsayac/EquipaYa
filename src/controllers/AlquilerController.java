@@ -60,6 +60,18 @@ public class AlquilerController {
         }
     }
 
+    public void devolver(String codigoEquipo) {
+        if (alquilerDAO.devolver(codigoEquipo)) {
+            EquipoModel equipo = equipoDAO.buscarPorCodigo(codigoEquipo);
+            if (equipo != null) {
+                equipo.setDisponible("S");        // el equipo queda libre otra vez
+                equipoDAO.actualizar(equipo);
+            }
+            System.out.println("Equipo devuelto correctamente");
+        } else {
+            System.out.println("Ese equipo no tiene un alquiler pendiente");
+        }
+    }
 
 
 

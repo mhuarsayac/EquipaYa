@@ -117,6 +117,25 @@ public class AlquilerDAOImpl implements AlquilerDAO {
     }
 
     @Override
+    public boolean devolver(String codigoEquipo) {
+        try {
+            String sql = "UPDATE alquiler SET devuelto = 'S' WHERE codigo_equipo = ? AND devuelto = 'N'";
+            Connection cn = DatabaseConnector.conectarBaseDeDatos();
+            PreparedStatement ps = cn.prepareStatement(sql);
+            ps.setString(1, codigoEquipo);
+            int filasAfectadas = ps.executeUpdate();
+            if (filasAfectadas > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException error) {
+            System.out.println("Error al devolver: " + error.getMessage());
+            return false;
+        }
+    }
+
+    @Override
     public boolean actualizar(AlquilerModel producto) {
         return false;
     }

@@ -16,8 +16,8 @@ public class AlquilerView {
                     "\n2. Registrar alquiler" +
                     "\n3. Buscar un alquiler" +
                     "\n4. Ver pendientes de devolucion" +
-                    "\n5. Regresar al menu principal");
-            System.out.print("Ingresa una opcion: ");
+                    "\n5. Devolver equipo" +
+                    "\n6. Regresar al menu principal");
             opcion = Integer.parseInt(scanner.nextLine());
             switch (opcion) {
                 case 1:
@@ -33,11 +33,11 @@ public class AlquilerView {
                     alquilerController.mostrarPendientes();
                     break;
                 case 5:
+                    devolverEquipo();
+                    break;
+                case 6:
                     System.out.println("Regresando al menu principal");
                     ejecutando = false;
-                    break;
-                default:
-                    System.out.println("Opcion incorrecta");
                     break;
             }
         }
@@ -59,5 +59,11 @@ public class AlquilerView {
         System.out.print("\nIngrese el id del alquiler a buscar: ");
         String id = scanner.nextLine();
         alquilerController.mostrarAlquilerPorCodigo(id);
+    }
+
+    private void devolverEquipo() {
+        System.out.print("\nCodigo del equipo a devuelto: ");
+        String codigoEquipo = scanner.nextLine();
+        alquilerController.devolver(codigoEquipo);
     }
 }
