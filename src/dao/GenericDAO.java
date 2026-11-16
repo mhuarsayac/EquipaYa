@@ -8,4 +8,5 @@ public interface GenericDAO<T,K> {
     T buscarPorCodigo(K codigo);
     boolean actualizar(T producto);
     boolean eliminar(K codigo);
+
 }

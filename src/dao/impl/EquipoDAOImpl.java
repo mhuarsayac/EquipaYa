@@ -78,7 +78,6 @@ public class EquipoDAOImpl implements EquipoDAO {
                         rs.getString("disponible"),
                         rs.getString("id_tipo")
                 );
-
                 if (equipo != null){
                     return equipo;
                 }
