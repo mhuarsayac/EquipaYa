@@ -32,7 +32,8 @@ public class MainView {
                     equipoView.ejecutar();
                     break;
                 case 4:
-
+                    AlquilerView alquilerView = new AlquilerView();
+                    alquilerView.ejecutar();
                     break;
                 case 5:
                     System.out.println("Finalizando programa");
